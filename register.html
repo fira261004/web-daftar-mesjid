@@ -1,55 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-body{
-  background:#0b1f17;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  color:#e6f6ee;
-  font-family:Arial;
-}
-.card{
-  background:#022c22;
-  padding:30px;
-  border-radius:15px;
-  width:300px;
-}
-input,button{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  border:none;
-}
-button{
-  background:#16a34a;
-  color:white;
-}
+body.dark {background:#0b1f17; color:#e6f6ee;}
+body.light {background:#f0fdf4; color:#064e3b;}
+.card {background:#022c22; color:#e6f6ee; border-radius:10px;}
+body.light .card {background:#fff; color:#064e3b;}
 </style>
 </head>
-<body>
-
-<div class="card">
-<h3>Daftar Akun</h3>
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="reg()">Daftar</button>
+<body class="dark">
+<div class="container mt-5" style="max-width:400px">
+  <div class="card shadow p-4">
+    <h3 class="text-center mb-3"><i class="fa-solid fa-mosque icon-float"></i> Daftar</h3>
+    <input id="user" class="form-control mb-2" placeholder="Username">
+    <input id="pass" type="password" class="form-control mb-3" placeholder="Password">
+    <button class="btn btn-primary w-100 mb-2" onclick="daftar()">Daftar</button>
+    <p class="text-center mt-2">Sudah punya akun? <a href="login.html">Login</a></p>
+    <button class="btn btn-outline-light w-100" onclick="toggleTheme()">
+      <i class="fa-solid fa-moon icon-spin"></i> Dark/Light
+    </button>
+  </div>
 </div>
-
 <script>
-function reg(){
-  let u=document.getElementById("user").value;
-  let p=document.getElementById("pass").value;
-  localStorage.setItem(u,p);
-  alert("Berhasil daftar");
-  window.location="index.html";
+function daftar(){
+  localStorage.setItem("user",user.value);
+  localStorage.setItem("pass",pass.value);
+  alert("Pendaftaran berhasil!");
+  location.href="login.html";
 }
+function toggleTheme(){
+  let body=document.body;
+  let mode=body.classList.contains("dark")?"light":"dark";
+  body.className=mode;
+  localStorage.setItem("theme",mode);
+}
+window.onload=()=>{document.body.className=localStorage.getItem("theme")||"dark";}
 </script>
-
 </body>
 </html>
